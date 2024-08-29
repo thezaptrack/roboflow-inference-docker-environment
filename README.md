@@ -1,1 +1,1 @@
-# raspberrypi-roboflow-inference-container
+# Roboflow inference Docker environment
