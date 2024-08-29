@@ -1,0 +1,11 @@
+services:
+  roboflow-inference:
+    image: roboflow-inference-image
+    container_name: roboflow-inference-container
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/workspace
+    tty: true
+    command: "/bin/bash"
