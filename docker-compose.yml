@@ -5,7 +5,13 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    environment:
+      - DISPLAY=${DISPLAY}
     volumes:
       - .:/workspace
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    devices:
+    - /dev/video0:/dev/video0
     tty: true
+    stdin_open: true
     command: "/bin/bash"
