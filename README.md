@@ -10,7 +10,7 @@ containerized template to get up and running with a `python` installation contai
 
 - the docker compose specification is configured to allow pass-through for the `/dev/video0` and `/dev/video1` device files in order to enable the container to access the webcam and/or other camera devices bound to those files.
 
-- the docker compose specification has the requisite volume mounts needed to allow display forwarding outside of the container and into the host via `X11` in order to have `opencv`'s windows working.
+- the docker compose specification has the requisite volume mounts needed to allow display forwarding outside of the container and into the host via `X11` in order to allow `opencv` to display GUI windows.
 
     ```yaml
         - /tmp/.X11-unix:/tmp/.X11-unix
