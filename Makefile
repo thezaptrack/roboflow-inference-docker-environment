@@ -1,9 +1,26 @@
 SHELL := /bin/bash
 
-.PHONY: start stop
+.PHONY: start stop xhost run
 
 start:
-	source start.sh
+	@chmod +x start.sh
+	@if [ "$(COMPUTE_TYPE)" = "gpu" ]; then \
+		export COMPUTE_TYPE="gpu"; \
+	elif [ "$(COMPUTE_TYPE)" = "cpu" ]; then \
+		export COMPUTE_TYPE="cpu"; \
+	elif [ "$(COMPUTE_TYPE)" = "" ]; then \
+		echo "no COMPUTE_TYPE specified, defaulting to 'cpu'"; \
+		export COMPUTE_TYPE="cpu"; \
+	else \
+		echo "invalid COMPUTE_TYPE specified. please use 'gpu' or 'cpu'"; \
+		exit 1; \
+	fi; \
+	./start.sh $$COMPUTE_TYPE
 
 stop:
 	source stop.sh
+
+xhost:
+	xhost +local:docker
+
+run: xhost start

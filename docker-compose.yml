@@ -7,11 +7,15 @@ services:
       dockerfile: ./Dockerfile
     environment:
       - DISPLAY=${DISPLAY}
+      - QT_DEBUG_PLUGINS=1
+      - QT_X11_NO_MITSHM=1
     volumes:
       - .:/workspace
       - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.Xauthority:/root/.Xauthority
     devices:
-    - /dev/video0:/dev/video0
+       - /dev/video0:/dev/video0
+       - /dev/video1:/dev/video1
     tty: true
     stdin_open: true
     command: "/bin/bash"

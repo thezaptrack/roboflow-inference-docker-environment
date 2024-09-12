@@ -19,11 +19,9 @@ RUN apt install -y --no-install-recommends \
 # refresh pip
 RUN pip install -U pip
 
-# install Roboflow's on-device inference SDK for CPU inference
-RUN pip install -U inference
-
-# alternatively, install Roboflow's on-device inference-gpu SDK for GPU inference if an AI accelerator is available
-# RUN pip install -U inference-gpu
+ARG COMPUTE_TYPE
+# install Roboflow's on-device inference or inference-gpu SDK for CPU/GPU inference
+RUN if [ "$COMPUTE_TYPE" = "gpu" ] ; then pip install -U inference-gpu ; else pip install -U inference ; fi
 
 WORKDIR /workspace
 
