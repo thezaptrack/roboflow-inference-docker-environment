@@ -3,6 +3,9 @@ FROM python:3.10-bullseye
 ENV TERM=xterm
 ENV DEBIAN_FRONTEND=noninteractive
 
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/workspace
+
 # refresh
 RUN apt update -y && apt upgrade -y
 
@@ -19,13 +22,10 @@ RUN apt install -y --no-install-recommends \
 # refresh pip
 RUN pip install -U pip
 
-ARG COMPUTE_TYPE
-# install Roboflow's on-device inference or inference-gpu SDK for CPU/GPU inference
-RUN if [ "$COMPUTE_TYPE" = "gpu" ] ; then pip install -U inference-gpu ; else pip install -U inference ; fi
-
 WORKDIR /workspace
-
 COPY . .
 
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH=/workspace
+ARG COMPUTE_TYPE
+
+# install dependencies conditionally based on build args
+RUN chmod +x dependencies.sh && ./dependencies.sh COMPUTE_TYPE=$COMPUTE_TYPE

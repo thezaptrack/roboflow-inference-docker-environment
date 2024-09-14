@@ -4,18 +4,8 @@ SHELL := /bin/bash
 
 start:
 	@chmod +x start.sh
-	@if [ "$(COMPUTE_TYPE)" = "gpu" ]; then \
-		export COMPUTE_TYPE="gpu"; \
-	elif [ "$(COMPUTE_TYPE)" = "cpu" ]; then \
-		export COMPUTE_TYPE="cpu"; \
-	elif [ "$(COMPUTE_TYPE)" = "" ]; then \
-		export COMPUTE_TYPE="cpu"; \
-		echo "no COMPUTE_TYPE specified, defaulting to '$$COMPUTE_TYPE'"; \
-	else \
-		echo "invalid COMPUTE_TYPE specified. please use 'gpu' or 'cpu'"; \
-		exit 1; \
-	fi; \
-	./start.sh $$COMPUTE_TYPE
+	@export COMPUTE_TYPE="$(COMPUTE_TYPE)"
+	@./start.sh COMPUTE_TYPE=$$COMPUTE_TYPE
 
 stop:
 	source stop.sh
