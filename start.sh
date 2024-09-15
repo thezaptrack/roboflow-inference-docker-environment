@@ -27,6 +27,6 @@ else
     exit 1
 fi
 
-docker-compose build --build-arg COMPUTE_TYPE=${COMPUTE_TYPE}
+docker compose build --build-arg COMPUTE_TYPE=${COMPUTE_TYPE}
 docker compose up -d
 docker compose exec $SERVICE $SHELL
