@@ -1,5 +1,7 @@
 import cv2
 
+from object_detection import run
+
 WINDOW_NAME = "opencv webcam"
 
 def run():
@@ -9,10 +11,13 @@ def run():
 
     while video_capture.isOpened():
         ret, frame = video_capture.read()
-        
-        print(ret, frame.shape)
 
-        cv2.imshow(WINDOW_NAME, frame)
+        results, detections, annotated_frame = object_detection.run(frame)
+
+        print(f"Predictions : {detections}")
+
+        cv2.imshow(WINDOW_NAME, annotated_frame)
+        
         if cv2.waitKey(1) == 27: 
             break  # esc to quit
 

@@ -31,6 +31,13 @@ also make sure you have the X server running on the host
 $ sudo X
 ```
 
+create a `.env` file in the project's root and provide your Roboflow API key and model ID
+
+```
+ROBOFLOW_API_KEY=<YOUR_API_KEY_GOES_HERE>
+ROBOFLOW_MODEL_ID=<YOUR_MODEL_ID_GOES_HERE>
+```
+
 ## run
 
 type
