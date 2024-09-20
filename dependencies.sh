@@ -18,3 +18,9 @@ else
     echo "[INFO] installing inference"
     pip install -U inference >/dev/null
 fi
+
+# install Roboflow's supervision module
+pip install supervision >/dev/null
+
+# install general Python deps
+pip install python-dotenv >/dev/null

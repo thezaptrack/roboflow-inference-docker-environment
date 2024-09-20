@@ -23,9 +23,11 @@ RUN apt install -y --no-install-recommends \
 RUN pip install -U pip
 
 WORKDIR /workspace
-COPY . .
+COPY dependencies.sh .
 
 ARG COMPUTE_TYPE
 
 # install dependencies conditionally based on build args
 RUN chmod +x dependencies.sh && ./dependencies.sh COMPUTE_TYPE=$COMPUTE_TYPE
+
+COPY . .
